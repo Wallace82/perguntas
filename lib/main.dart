@@ -2,44 +2,64 @@ import 'package:flutter/material.dart';
 
 main() => runApp(PerguntaApp());
 
+class PerguntaAppState extends State<PerguntaApp>{
 
-
-class PerguntaApp extends StatelessWidget{
+  var persguntaSelecionada = 0;
 
   void responder(){
+    setState(() {
+      persguntaSelecionada++;
+    });
+
     print('Pergunta repondida!');
   }
+
 
   @override
   Widget build(BuildContext context){
 
-    final perguntas  = ['Qual é sua cor favorita?', 'Qual é seu animal favorito?'];
+    final perguntas  = [
+      'Qual é sua cor favorita?',
+      'Qual é seu animal favorito?',
+      'Qual é sua cor favorita?',
+      'Qual é seu animal favorito?',
+      'Qual é sua cor favorita?',
+      'Qual é seu animal favorito?'
+    ];
+
 
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Perguntas'),
-        ),
-        body: Column(
-           children:<Widget> [
-             Text(perguntas[0]),
-             RaisedButton(
-                 child: Text('Resposta 1') ,
-                 onPressed: (){
-                   print('Resposta 1 respondida!');
-                 }
-             ),
-             RaisedButton(
-                 child: Text('Resposta 2') ,
-                 onPressed: ()=> print('Resposta 2 respondida!')
-             ),
-             RaisedButton(
-                 child: Text('Resposta 3') ,
-                 onPressed: responder
-             ),
-           ],
-        )
+          appBar: AppBar(
+            title: Text('Perguntas'),
+          ),
+          body: Column(
+            children:<Widget> [
+              Text(perguntas[persguntaSelecionada]),
+              RaisedButton(
+                  child: Text('Resposta 1') ,
+                  onPressed: responder
+              ),
+              RaisedButton(
+                  child: Text('Resposta 2') ,
+                  onPressed: responder
+              ),
+              RaisedButton(
+                  child: Text('Resposta 3') ,
+                  onPressed: responder
+              ),
+            ],
+          )
       ),
     );
   }
+}
+
+class PerguntaApp extends StatefulWidget{
+
+  @override
+  PerguntaAppState createState() {
+   return PerguntaAppState();
+  }
+
 }
