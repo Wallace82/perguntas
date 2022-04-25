@@ -1,14 +1,21 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show AppBar, BuildContext, Column, MaterialApp, RaisedButton, Scaffold, State, StatefulWidget, Text, Widget, runApp;
+import 'package:projeto_perguntas/questao.dart';
+
 
 main() => runApp(PerguntaApp());
 
-class PerguntaAppState extends State<PerguntaApp>{
+class _PerguntaAppState extends State<PerguntaApp>{
 
   var persguntaSelecionada = 0;
 
-  void responder(){
+  void _responder(){
     setState(() {
-      persguntaSelecionada++;
+      if(persguntaSelecionada>=5){
+        persguntaSelecionada = 0;
+      }
+      else {
+        persguntaSelecionada++;
+      }
     });
 
     print('Pergunta repondida!');
@@ -21,10 +28,10 @@ class PerguntaAppState extends State<PerguntaApp>{
     final perguntas  = [
       'Qual é sua cor favorita?',
       'Qual é seu animal favorito?',
-      'Qual é sua cor favorita?',
-      'Qual é seu animal favorito?',
-      'Qual é sua cor favorita?',
-      'Qual é seu animal favorito?'
+      'Qual é sua time favorita?',
+      'Quantos anos você tem?',
+      'Em qual cidade você mora?',
+      'Você gosta de flutter?'
     ];
 
 
@@ -35,18 +42,18 @@ class PerguntaAppState extends State<PerguntaApp>{
           ),
           body: Column(
             children:<Widget> [
-              Text(perguntas[persguntaSelecionada]),
+              Questao(perguntas[persguntaSelecionada]),
               RaisedButton(
-                  child: Text('Resposta 1') ,
-                  onPressed: responder
+                  child: Text('DAVI') ,
+                  onPressed: _responder
               ),
               RaisedButton(
-                  child: Text('Resposta 2') ,
-                  onPressed: responder
+                  child: Text('Serena') ,
+                  onPressed: _responder
               ),
               RaisedButton(
-                  child: Text('Resposta 3') ,
-                  onPressed: responder
+                  child: Text('Maria helena') ,
+                  onPressed: _responder
               ),
             ],
           )
@@ -58,8 +65,8 @@ class PerguntaAppState extends State<PerguntaApp>{
 class PerguntaApp extends StatefulWidget{
 
   @override
-  PerguntaAppState createState() {
-   return PerguntaAppState();
+  _PerguntaAppState createState() {
+   return _PerguntaAppState();
   }
 
 }
