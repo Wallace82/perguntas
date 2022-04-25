@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart' show AppBar, BuildContext, Column, MaterialApp, RaisedButton, Scaffold, State, StatefulWidget, Text, Widget, runApp;
 import 'package:projeto_perguntas/questao.dart';
+import 'package:projeto_perguntas/resposta.dart';
 
 
 main() => runApp(PerguntaApp());
 
 class _PerguntaAppState extends State<PerguntaApp>{
 
-  var persguntaSelecionada = 0;
+  var _perguntaSelecionada = 0;
 
-  void _responder(){
+  void _responder() {
     setState(() {
-      if(persguntaSelecionada>=5){
-        persguntaSelecionada = 0;
+      if (_perguntaSelecionada >= 5) {
+        _perguntaSelecionada = 0;
       }
       else {
-        persguntaSelecionada++;
+        _perguntaSelecionada++;
       }
+
+      print(_perguntaSelecionada);
     });
 
-    print('Pergunta repondida!');
   }
-
 
   @override
   Widget build(BuildContext context){
@@ -28,7 +29,7 @@ class _PerguntaAppState extends State<PerguntaApp>{
     final perguntas  = [
       'Qual é sua cor favorita?',
       'Qual é seu animal favorito?',
-      'Qual é sua time favorita?',
+      'Qual é seu time favorita?',
       'Quantos anos você tem?',
       'Em qual cidade você mora?',
       'Você gosta de flutter?'
@@ -42,19 +43,10 @@ class _PerguntaAppState extends State<PerguntaApp>{
           ),
           body: Column(
             children:<Widget> [
-              Questao(perguntas[persguntaSelecionada]),
-              RaisedButton(
-                  child: Text('DAVI') ,
-                  onPressed: _responder
-              ),
-              RaisedButton(
-                  child: Text('Serena') ,
-                  onPressed: _responder
-              ),
-              RaisedButton(
-                  child: Text('Maria helena') ,
-                  onPressed: _responder
-              ),
+              Questao(perguntas[_perguntaSelecionada]),
+              Resposta('Pergunta1',_responder),
+              Resposta('Pergunta2',_responder),
+              Resposta('Pergunta3',_responder)
             ],
           )
       ),
