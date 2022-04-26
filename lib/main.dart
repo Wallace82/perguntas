@@ -11,14 +11,14 @@ class _PerguntaAppState extends State<PerguntaApp>{
 
   void _responder() {
     setState(() {
-      if (_perguntaSelecionada >= 5) {
+      if (_perguntaSelecionada >= 3) {
         _perguntaSelecionada = 0;
       }
       else {
         _perguntaSelecionada++;
       }
 
-      print(_perguntaSelecionada);
+
     });
 
   }
@@ -26,15 +26,29 @@ class _PerguntaAppState extends State<PerguntaApp>{
   @override
   Widget build(BuildContext context){
 
-    final perguntas  = [
-      'Qual é sua cor favorita?',
-      'Qual é seu animal favorito?',
-      'Qual é seu time favorita?',
-      'Quantos anos você tem?',
-      'Em qual cidade você mora?',
-      'Você gosta de flutter?'
+    final List<Map<String,Object>> perguntas  = [
+      {
+        'texto':'Qual sua cor favorita?',
+        'respostas':['Preto','Vermelho','Verde','Amarelo']
+      },
+      {
+        'texto':'Quantos anos você tem?',
+        'respostas':['15','20','1','90']
+      },
+      {
+        'texto':'Qual é seu time favorita?',
+        'respostas':['Flamengo','Botafogo','Vasco','Fluminense']
+      },
+      {
+        'texto':'Qual é seu animal favorito??',
+        'respostas':['Cachorro','Cavalo','Gato','Peixe']
+      },
     ];
 
+    List<Widget> respostas = [];
+    for(String textRespo in perguntas[_perguntaSelecionada].cast()['respostas']) {
+      respostas.add(Resposta(textRespo, _responder));
+    }
 
     return MaterialApp(
       home: Scaffold(
@@ -43,10 +57,8 @@ class _PerguntaAppState extends State<PerguntaApp>{
           ),
           body: Column(
             children:<Widget> [
-              Questao(perguntas[_perguntaSelecionada]),
-              Resposta('Pergunta1',_responder),
-              Resposta('Pergunta2',_responder),
-              Resposta('Pergunta3',_responder)
+              Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
+              ...respostas,
             ],
           )
       ),
